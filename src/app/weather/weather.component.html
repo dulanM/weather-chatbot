@@ -1,0 +1,16 @@
+<div class="weather-container">
+  <div class="searchbar-container">
+    <mat-form-field>
+      <input matInput [formControl]="location" placeholder="Enter location" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="location.invalid" (click)="getWeatherData()">Search</button>
+  </div>
+  <div class="weather-details-wrapper">
+    <mat-error *ngIf="errorMessage" class="error-message">
+      {{errorMessage}}
+    </mat-error>
+    <div class="weather-details-container" *ngFor="let data of weatherdata">
+      <app-weather-data [weatherDetails]="data"></app-weather-data>
+    </div>
+  </div>
+</div>

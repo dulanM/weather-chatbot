@@ -1,0 +1,21 @@
+:host {
+  .weather-container {
+    justify-content: center;
+    display: flex;
+    margin-top: 50px;
+    flex-direction: column;
+  }
+  .searchbar-container {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  }
+  mat-form-field {
+    padding-right: 20px;
+  }
+  .weather-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

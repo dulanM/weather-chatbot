@@ -1,0 +1,27 @@
+:host {
+  h2 {
+    text-align: center;
+  }
+  .login-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  mat-card {
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .error-message {
+    margin-top: 10px;
+    text-align: center;
+  }
+}
