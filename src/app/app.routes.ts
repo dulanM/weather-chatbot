@@ -5,7 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'weather', component: WeatherComponent, canActivate: [AuthGuard] },
+  { path: 'weather', canActivate: [AuthGuard], loadComponent: () => import('./weather/weather.component').then(m => m.WeatherComponent) },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
 ];

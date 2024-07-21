@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WeatherDataComponent } from "../weather-data/weather-data.component";
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,16 +20,14 @@ import { WeatherData } from '../models/weatherData.model';
   templateUrl: './weather.component.html',
   styleUrl: './weather.component.scss'
 })
-export class WeatherComponent implements OnInit {
+export class WeatherComponent implements OnInit, OnDestroy {
   location: FormControl = new FormControl('');
   weatherdata: WeatherData[] = [];
   errorMessage: string = '';
   constructor(private weatherService: WeatherService) { }
 
-  ngOnInit(): void {}
-
-  getWeatherData() {
-    this.weatherService.getWeather(this.location.value).subscribe({
+  ngOnInit(): void {
+    this.weatherService.getWeatherData().subscribe({
       next: (res) => {
         this.weatherdata = res;
         this.errorMessage = '';
@@ -39,5 +37,18 @@ export class WeatherComponent implements OnInit {
         this.errorMessage = err.message;
       }
     });
+
+    this.weatherService.getError().subscribe((err) => {
+      this.weatherdata = [];
+      this.errorMessage = err;
+    });
+  }
+
+  getWeatherData() {
+    this.weatherService.getWeather(this.location.value);
+  }
+
+  ngOnDestroy(): void {
+      this.weatherService.closeSocket();
   }
 }
